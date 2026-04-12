@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Food — FoodSave</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo"><span class="logo-leaf">🌿</span><span>FoodSave</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="browse.html" class="active">Browse Food</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="impact.html">Impact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-ghost" id="loginBtn">Login</a>
+        <a href="auth.html?mode=register" class="btn-primary" id="signupBtn">Join Free</a>
+        <a href="dashboard.html" class="btn-primary hidden" id="dashBtn">Dashboard</a>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Filters -->
+  <div class="filters-bar" style="margin-top:68px">
+    <div class="container">
+      <div class="filters-inner">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search food..."/>
+        <button class="filter-chip active" data-status="">All</button>
+        <button class="filter-chip" data-status="available">Available</button>
+        <button class="filter-chip" data-status="claimed">Claimed</button>
+        <button class="filter-chip" data-status="completed">Completed</button>
+        <select class="filter-select" id="catFilter">
+          <option value="">All Categories</option>
+          <option value="cooked">🍛 Cooked</option>
+          <option value="grocery">🛒 Grocery</option>
+          <option value="bakery">🥖 Bakery</option>
+          <option value="fruits">🍎 Fruits & Veg</option>
+          <option value="sweets">🍬 Sweets</option>
+          <option value="beverages">🥤 Beverages</option>
+        </select>
+        <select class="filter-select" id="dietFilter">
+          <option value="">All Diets</option>
+          <option value="vegetarian">🟢 Vegetarian</option>
+          <option value="vegan">🌿 Vegan</option>
+          <option value="non-vegetarian">🔴 Non-Veg</option>
+        </select>
+        <span id="resultCount" style="margin-left:auto;font-size:0.85rem;color:var(--ink-40)"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <section style="padding:40px 0 20px;background:var(--ink-10)">
+    <div class="container">
+      <h1 style="font-size:2rem;margin-bottom:8px">Available Food Near You</h1>
+      <p>Browse and claim free food donations in your city</p>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section style="padding:40px 0 80px">
+    <div class="container">
+      <div class="feed-grid" id="donationsGrid">
+        <div class="feed-loading">Loading donations...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" style="display:none" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Donation Details</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    let allDonations = [];
+    let activeStatus = '';
+    let searchTerm = '';
+
+    async function loadDonations() {
+      const grid = document.getElementById('donationsGrid');
+      grid.innerHTML = '<div class="feed-loading">Loading...</div>';
+      try {
+        const params = {};
+        const cat = document.getElementById('catFilter').value;
+        const diet = document.getElementById('dietFilter').value;
+        if (cat) params.category = cat;
+        if (diet) params.dietType = diet;
+        if (activeStatus) params.status = activeStatus;
+        allDonations = await api.getDonations(params);
+        renderDonations();
+      } catch (err) {
+        grid.innerHTML = `<div class="feed-loading">⚠️ Could not load donations. Make sure the server is running.<br><small>${err.message}</small></div>`;
+      }
+    }
+
+    function renderDonations() {
+      const grid = document.getElementById('donationsGrid');
+      let filtered = allDonations;
+      if (searchTerm) {
+        const s = searchTerm.toLowerCase();
+        filtered = filtered.filter(d =>
+          d.title.toLowerCase().includes(s) ||
+          d.description?.toLowerCase().includes(s) ||
+          d.city?.toLowerCase().includes(s) ||
+          d.donorName?.toLowerCase().includes(s)
+        );
+      }
+      document.getElementById('resultCount').textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="feed-loading">No donations found. Try different filters.</div>';
+        return;
+      }
+      const canClaim = api.isLoggedIn() && api.getUser()?.role === 'recipient';
+      grid.innerHTML = filtered.map(d => utils.createDonationCard(d, canClaim)).join('');
+    }
+
+    async function handleClaim(id) {
+      if (!api.isLoggedIn()) { window.location.href = 'auth.html'; return; }
+      try {
+        await api.claimDonation(id);
+        toast.show('Food claimed! 🎉 Check your dashboard for pickup details.', 'success');
+        loadDonations();
+      } catch (err) { toast.show(err.message, 'error'); }
+    }
+
+    function closeModal() { document.getElementById('detailModal').style.display = 'none'; }
+
+    // Filter chips
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeStatus = chip.dataset.status;
+        loadDonations();
+      });
+    });
+
+    // Search
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => { searchTerm = e.target.value.trim(); renderDonations(); }, 300);
+    });
+
+    // Category / diet filters
+    document.getElementById('catFilter').addEventListener('change', loadDonations);
+    document.getElementById('dietFilter').addEventListener('change', loadDonations);
+
+    // URL params
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('category')) { document.getElementById('catFilter').value = params.get('category'); }
+
+    document.addEventListener('DOMContentLoaded', loadDonations);
+  </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impact Dashboard — FoodSave</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo"><span class="logo-leaf">🌿</span><span>FoodSave</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="browse.html">Browse Food</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="impact.html" class="active">Impact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-ghost" id="loginBtn">Login</a>
+        <a href="auth.html?mode=register" class="btn-primary" id="signupBtn">Join Free</a>
+        <a href="dashboard.html" class="btn-primary hidden" id="dashBtn">Dashboard</a>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding:100px 0 60px;background:linear-gradient(135deg,var(--green-600),var(--green-500));color:white">
+    <div class="container" style="text-align:center">
+      <div style="display:inline-block;background:rgba(255,255,255,0.15);padding:8px 20px;border-radius:100px;font-size:0.85rem;font-weight:700;margin-bottom:20px">🌍 Real Impact, Real Numbers</div>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:16px;color:white">FoodSave Impact Dashboard</h1>
+      <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;max-width:600px;margin:0 auto">Live statistics from our food rescue operations across India</p>
+    </div>
+  </section>
+
+  <section style="padding:0">
+    <div class="container">
+      <div id="statsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:-30px">
+        <!-- Loaded by JS -->
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:80px 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:60px" class="impact-two-col">
+        <!-- Donation Status Breakdown -->
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:32px">
+          <h3 style="margin-bottom:24px">Donations by Status</h3>
+          <div id="statusBreakdown">Loading...</div>
+        </div>
+        <!-- Category Breakdown -->
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:32px">
+          <h3 style="margin-bottom:24px">Food by Category</h3>
+          <div id="categoryBreakdown">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Environmental Impact -->
+      <div style="background:var(--green-50);border:1px solid var(--green-200);border-radius:var(--r-lg);padding:48px;text-align:center;margin-bottom:60px">
+        <h2 style="margin-bottom:16px">🌱 Environmental Impact</h2>
+        <p style="color:var(--ink-60);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto">Food waste is a major contributor to greenhouse gas emissions. Every kg of food rescued prevents significant CO₂ from entering the atmosphere.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px" id="envStats">
+          <div style="background:white;border-radius:var(--r);padding:28px;border:1px solid var(--border)">
+            <div style="font-size:2.5rem;margin-bottom:12px">🌍</div>
+            <div id="co2Num" style="font-family:var(--ff-head);font-size:2.5rem;font-weight:800;color:var(--green-500)">...</div>
+            <div style="font-size:0.85rem;color:var(--ink-40);margin-top:4px">kg CO₂ Prevented</div>
+          </div>
+          <div style="background:white;border-radius:var(--r);padding:28px;border:1px solid var(--border)">
+            <div style="font-size:2.5rem;margin-bottom:12px">💧</div>
+            <div id="waterNum" style="font-family:var(--ff-head);font-size:2.5rem;font-weight:800;color:var(--green-500)">...</div>
+            <div style="font-size:0.85rem;color:var(--ink-40);margin-top:4px">Litres Water Saved</div>
+          </div>
+          <div style="background:white;border-radius:var(--r);padding:28px;border:1px solid var(--border)">
+            <div style="font-size:2.5rem;margin-bottom:12px">🏠</div>
+            <div id="homesNum" style="font-family:var(--ff-head);font-size:2.5rem;font-weight:800;color:var(--green-500)">...</div>
+            <div style="font-size:0.85rem;color:var(--ink-40);margin-top:4px">Homes Powered (Days)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:32px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+          <h3>Recent Completed Donations</h3>
+          <a href="browse.html" style="color:var(--green-500);font-size:0.9rem;font-weight:600">View All →</a>
+        </div>
+        <div id="recentCompleted">Loading...</div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @media(max-width:700px){ .impact-two-col{grid-template-columns:1fr} }
+  </style>
+
+  <script src="../js/api.js"></script>
+  <script>
+    function createBar(label, value, max, color, emoji) {
+      const pct = max > 0 ? Math.round((value / max) * 100) : 0;
+      return `<div style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.875rem">
+          <span>${emoji} ${label}</span><span style="font-weight:700;color:var(--ink)">${value}</span>
+        </div>
+        <div style="background:var(--border);border-radius:100px;height:10px;overflow:hidden">
+          <div style="width:${pct}%;background:${color};height:100%;border-radius:100px;transition:width 1s ease"></div>
+        </div>
+      </div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const [stats, donations] = await Promise.all([api.getStats(), api.getDonations()]);
+
+        // Top stats
+        const statsEl = document.getElementById('statsGrid');
+        statsEl.innerHTML = [
+          { icon:'🍽️', num: stats.totalDonations, label:'Total Donations', color:'var(--green-500)' },
+          { icon:'♻️', num: `${stats.totalFoodSaved}kg`, label:'Food Rescued', color:'var(--orange)' },
+          { icon:'👨‍👩‍👧', num: stats.mealsProvided, label:'Meals Provided', color:'var(--blue)' },
+          { icon:'🌍', num: `${stats.co2Saved}kg`, label:'CO₂ Saved', color:'var(--green-500)' },
+          { icon:'👤', num: stats.totalDonors, label:'Active Donors', color:'var(--orange)' },
+          { icon:'🏥', num: stats.totalRecipients, label:'NGOs & Recipients', color:'var(--blue)' },
+        ].map(s => `
+          <div style="background:white;border:1px solid var(--border);padding:32px 24px;text-align:center;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+            <div style="font-size:2.2rem;margin-bottom:12px">${s.icon}</div>
+            <div style="font-family:var(--ff-head);font-size:2rem;font-weight:800;color:${s.color}">${s.num.toLocaleString?.() ?? s.num}</div>
+            <div style="font-size:0.8rem;color:var(--ink-40);margin-top:4px">${s.label}</div>
+          </div>`).join('');
+
+        // Status breakdown
+        const statuses = ['available','claimed','completed','expired'];
+        const statusCounts = {};
+        statuses.forEach(s => statusCounts[s] = donations.filter(d => d.status === s).length);
+        const maxStatus = Math.max(...Object.values(statusCounts));
+        const statusColors = { available:'var(--green-500)', claimed:'var(--orange)', completed:'var(--blue)', expired:'#9e9e9e' };
+        const statusEmoji = { available:'🟢', claimed:'🟡', completed:'✅', expired:'⚪' };
+        document.getElementById('statusBreakdown').innerHTML = statuses.map(s =>
+          createBar(s.charAt(0).toUpperCase()+s.slice(1), statusCounts[s], maxStatus, statusColors[s], statusEmoji[s])
+        ).join('');
+
+        // Category breakdown
+        const cats = ['cooked','grocery','bakery','fruits','sweets','beverages','other'];
+        const catEmojis = { cooked:'🍛', grocery:'🛒', bakery:'🥖', fruits:'🍎', sweets:'🍬', beverages:'🥤', other:'🍽️' };
+        const catCounts = {};
+        cats.forEach(c => catCounts[c] = donations.filter(d => d.category === c).length);
+        const maxCat = Math.max(...Object.values(catCounts), 1);
+        document.getElementById('categoryBreakdown').innerHTML = cats.filter(c => catCounts[c] > 0).map(c =>
+          createBar(c.charAt(0).toUpperCase()+c.slice(1), catCounts[c], maxCat, 'var(--green-400)', catEmojis[c])
+        ).join('') || '<div style="color:var(--ink-40);text-align:center;padding:20px">No data yet</div>';
+
+        // Environmental
+        document.getElementById('co2Num').textContent = stats.co2Saved.toLocaleString();
+        document.getElementById('waterNum').textContent = (stats.totalFoodSaved * 500).toLocaleString();
+        document.getElementById('homesNum').textContent = Math.floor(stats.co2Saved / 10);
+
+        // Recent completed
+        const completed = donations.filter(d => d.status === 'completed').slice(0, 5);
+        document.getElementById('recentCompleted').innerHTML = completed.length === 0
+          ? '<div style="text-align:center;padding:32px;color:var(--ink-40)">No completed donations yet</div>'
+          : completed.map(d => `
+            <div style="display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)">
+              <span style="font-size:2rem">${utils.categoryEmoji(d.category)}</span>
+              <div style="flex:1">
+                <div style="font-weight:600;font-size:0.9rem">${d.title}</div>
+                <div style="font-size:0.8rem;color:var(--ink-40)">${d.quantity} · ${d.servings} meals · ${utils.timeAgo(d.completedAt || d.createdAt)}</div>
+              </div>
+              <span style="background:var(--green-50);color:var(--green-500);padding:4px 12px;border-radius:100px;font-size:0.78rem;font-weight:700">✓ Done</span>
+            </div>`).join('');
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('statsGrid').innerHTML = `<div style="padding:40px;color:var(--red);grid-column:1/-1">⚠️ Could not load stats. Make sure the backend server is running.</div>`;
+      }
+    });
+  </script>
+</body>
+</html>

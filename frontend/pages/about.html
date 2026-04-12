@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — FoodSave</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo"><span class="logo-leaf">🌿</span><span>FoodSave</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="browse.html">Browse Food</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-ghost" id="loginBtn">Login</a>
+        <a href="auth.html?mode=register" class="btn-primary" id="signupBtn">Join Free</a>
+        <a href="dashboard.html" class="btn-primary hidden" id="dashBtn">Dashboard</a>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section style="padding:120px 0 80px;background:var(--ink-10)">
+    <div class="container" style="max-width:760px;text-align:center">
+      <div class="section-tag">Our Mission</div>
+      <h1 style="margin:16px 0 24px">Fighting Food Waste,<br>One Meal at a Time</h1>
+      <p style="font-size:1.15rem;line-height:1.8;color:var(--ink-60)">India wastes approximately 68 million tonnes of food every year — while 195 million people go hungry. FoodSave bridges this gap by connecting food donors directly with communities in need.</p>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section style="padding:80px 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center" class="two-col">
+        <div>
+          <div class="section-tag">The Problem</div>
+          <h2 style="margin:16px 0 20px">The Food Waste Crisis in India</h2>
+          <p style="margin-bottom:20px;line-height:1.8">India wastes enough food to feed its entire hungry population multiple times over. Wedding functions, restaurants, hotels, and events routinely discard massive quantities of perfectly safe, edible food.</p>
+          <p style="line-height:1.8">This not only represents a massive humanitarian loss, but also a significant environmental problem — decomposing food waste in landfills produces methane, a potent greenhouse gas.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px">
+            <div style="background:var(--orange-light);border-radius:var(--r);padding:20px;text-align:center">
+              <div style="font-family:var(--ff-head);font-size:2rem;font-weight:800;color:var(--orange)">68M</div>
+              <div style="font-size:0.85rem;color:var(--ink-60)">Tonnes wasted yearly</div>
+            </div>
+            <div style="background:#ffebee;border-radius:var(--r);padding:20px;text-align:center">
+              <div style="font-family:var(--ff-head);font-size:2rem;font-weight:800;color:var(--red)">195M</div>
+              <div style="font-size:0.85rem;color:var(--ink-60)">People go hungry</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--green-50);border-radius:var(--r-lg);padding:48px;text-align:center;border:1px solid var(--green-200)">
+          <div style="font-size:5rem;margin-bottom:20px">🌾</div>
+          <h3 style="margin-bottom:16px">Every Meal Matters</h3>
+          <p style="color:var(--ink-60);line-height:1.7">The food you save today could nourish a child, support an elderly person, or help a family in need. With FoodSave, your surplus becomes someone else's sustenance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we solve it -->
+  <section style="padding:80px 0;background:var(--ink-10)">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Solution</span>
+        <h2>How FoodSave Works</h2>
+        <p>A simple, technology-driven platform that makes food donation effortless</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px">
+        <div style="background:white;border-radius:var(--r-lg);padding:32px;border:1px solid var(--border)">
+          <div style="font-size:2.5rem;margin-bottom:16px">📱</div>
+          <h3 style="margin-bottom:12px;font-size:1.1rem">Easy Listing</h3>
+          <p style="font-size:0.9rem">Post surplus food in under 2 minutes with our intuitive mobile-first interface</p>
+        </div>
+        <div style="background:white;border-radius:var(--r-lg);padding:32px;border:1px solid var(--border)">
+          <div style="font-size:2.5rem;margin-bottom:16px">🔔</div>
+          <h3 style="margin-bottom:12px;font-size:1.1rem">Instant Alerts</h3>
+          <p style="font-size:0.9rem">Nearby NGOs and recipients get real-time notifications when food becomes available</p>
+        </div>
+        <div style="background:white;border-radius:var(--r-lg);padding:32px;border:1px solid var(--border)">
+          <div style="font-size:2.5rem;margin-bottom:16px">🗺️</div>
+          <h3 style="margin-bottom:12px;font-size:1.1rem">Location-Based</h3>
+          <p style="font-size:0.9rem">Smart matching connects donors with the nearest available recipients to minimize travel</p>
+        </div>
+        <div style="background:white;border-radius:var(--r-lg);padding:32px;border:1px solid var(--border)">
+          <div style="font-size:2.5rem;margin-bottom:16px">⭐</div>
+          <h3 style="margin-bottom:12px;font-size:1.1rem">Trust System</h3>
+          <p style="font-size:0.9rem">Verified profiles and ratings build accountability and encourage repeat participation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API docs -->
+  <section style="padding:80px 0">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Developers</span>
+        <h2>API Documentation</h2>
+        <p>Build on top of FoodSave with our REST API</p>
+      </div>
+      <div style="background:var(--ink);border-radius:var(--r-lg);padding:40px;color:white;font-family:monospace">
+        <div style="color:var(--green-400);margin-bottom:24px;font-family:var(--ff-head);font-size:1.1rem">🔌 Base URL: http://localhost:5000/api</div>
+        <div style="display:grid;gap:16px">
+          ${[
+            ['POST','/auth/login','Login and get JWT token'],
+            ['POST','/auth/register','Register a new user'],
+            ['GET','/auth/me','Get current user (auth required)'],
+            ['GET','/donations','List all donations (with filters)'],
+            ['GET','/donations/stats','Get platform impact statistics'],
+            ['POST','/donations','Create a donation (donor auth)'],
+            ['PUT','/donations/:id','Update a donation'],
+            ['DELETE','/donations/:id','Delete a donation'],
+            ['POST','/donations/:id/claim','Claim a donation (recipient auth)'],
+            ['POST','/donations/:id/complete','Mark donation complete'],
+            ['GET','/users/:id/donations','Get donations by user'],
+            ['GET','/users/notifications/mine','Get user notifications'],
+          ].map(([method, path, desc]) => `
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.85rem">
+              <span style="background:${method==='GET'?'#1565c0':method==='POST'?'#1b5e20':method==='PUT'?'#e65100':'#b71c1c'};padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:700;min-width:52px;text-align:center">${method}</span>
+              <code style="color:var(--green-400)">${path}</code>
+              <span style="color:rgba(255,255,255,0.5);margin-left:auto">${desc}</span>
+            </div>`).join('')}
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+          <strong style="color:white">Auth:</strong> Include <code style="color:var(--green-400)">Authorization: Bearer &lt;token&gt;</code> header for protected routes
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Join the Movement</h2>
+          <p>Every donation, no matter how small, makes a difference</p>
+        </div>
+        <div class="cta-btns">
+          <a href="auth.html?mode=register&role=donor" class="btn-cta-primary">Start Donating</a>
+          <a href="auth.html?mode=register&role=recipient" class="btn-cta-ghost">Register NGO</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2025 FoodSave. Made with 💚 in Jaipur, Rajasthan</p>
+      </div>
+    </div>
+  </footer>
+  <style>@media(max-width:700px){.two-col{grid-template-columns:1fr}}</style>
+  <script src="../js/api.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodSave — Share Food, Spread Hope</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-leaf">🌿</span>
+        <span>FoodSave</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="pages/browse.html">Browse Food</a></li>
+        <li><a href="pages/donate.html">Donate</a></li>
+        <li><a href="pages/impact.html">Impact</a></li>
+        <li><a href="pages/about.html">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="pages/auth.html" class="btn-ghost" id="loginBtn">Login</a>
+        <a href="pages/auth.html?mode=register" class="btn-primary" id="signupBtn">Join Free</a>
+        <a href="pages/dashboard.html" class="btn-primary hidden" id="dashBtn">Dashboard</a>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🇮🇳 Serving India, One Meal at a Time</div>
+      <h1 class="hero-title">
+        <span>Turn Leftover</span>
+        <span class="accent-text">Food into</span>
+        <span>Opportunity</span>
+      </h1>
+      <p class="hero-sub">Connect food donors with NGOs, shelters & communities. Zero waste. Zero hunger. Every meal counts.</p>
+      <div class="hero-cta">
+        <a href="pages/donate.html" class="btn-hero-primary">Donate Food Now</a>
+        <a href="pages/browse.html" class="btn-hero-ghost">Find Food Near You →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-num" data-target="2340">0</span><span>kg Saved</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num" data-target="187">0</span><span>Donations</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num" data-target="9360">0</span><span>Meals</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num" data-target="89">0</span><span>Donors</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="food-card-float fc1">
+        <span>🍛</span>
+        <div>
+          <strong>Biryani & Bread</strong>
+          <small>15 kg · 2 hrs left</small>
+        </div>
+        <span class="tag-green">Available</span>
+      </div>
+      <div class="food-card-float fc2">
+        <span>🥦</span>
+        <div>
+          <strong>Fresh Vegetables</strong>
+          <small>8 kg · Claimed</small>
+        </div>
+        <span class="tag-orange">Claimed</span>
+      </div>
+      <div class="food-card-float fc3">
+        <span>🍬</span>
+        <div>
+          <strong>Festival Sweets</strong>
+          <small>5 kg · Completed</small>
+        </div>
+        <span class="tag-blue">Done ✓</span>
+      </div>
+      <div class="hero-circle"></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Simple Process</span>
+        <h2>How FoodSave Works</h2>
+        <p>Three steps to reduce food waste and feed those in need</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">📸</div>
+          <div class="step-num">01</div>
+          <h3>List Your Food</h3>
+          <p>Snap a photo, add details like quantity and pickup time. Post in under 2 minutes.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-icon">🔔</div>
+          <div class="step-num">02</div>
+          <h3>Get Matched</h3>
+          <p>Nearby NGOs and recipients get instant alerts. First to claim gets the food.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-icon">🤝</div>
+          <div class="step-num">03</div>
+          <h3>Pickup & Deliver</h3>
+          <p>Recipient picks up or arranges delivery. Both parties confirm, and you've made an impact!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE FEED -->
+  <section class="section feed-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Live</span>
+        <h2>Available Food Near You</h2>
+        <p>Real-time donations open for claiming in Jaipur</p>
+      </div>
+      <div class="feed-grid" id="liveFeed">
+        <div class="feed-loading">Loading available food...</div>
+      </div>
+      <div class="text-center mt-40">
+        <a href="pages/browse.html" class="btn-outline">View All Available Food →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section categories-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Browse by Type</span>
+        <h2>Food Categories</h2>
+      </div>
+      <div class="cat-grid">
+        <a href="pages/browse.html?category=cooked" class="cat-card" style="--cat-color:#e8f5e9">
+          <span>🍛</span><strong>Cooked Food</strong><small>Ready to eat</small>
+        </a>
+        <a href="pages/browse.html?category=grocery" class="cat-card" style="--cat-color:#fff3e0">
+          <span>🛒</span><strong>Groceries</strong><small>Raw & packaged</small>
+        </a>
+        <a href="pages/browse.html?category=bakery" class="cat-card" style="--cat-color:#fce4ec">
+          <span>🥖</span><strong>Bakery</strong><small>Breads & pastries</small>
+        </a>
+        <a href="pages/browse.html?category=fruits" class="cat-card" style="--cat-color:#e8eaf6">
+          <span>🍎</span><strong>Fruits & Veg</strong><small>Fresh produce</small>
+        </a>
+        <a href="pages/browse.html?category=sweets" class="cat-card" style="--cat-color:#f3e5f5">
+          <span>🍬</span><strong>Sweets</strong><small>Mithai & snacks</small>
+        </a>
+        <a href="pages/browse.html?category=beverages" class="cat-card" style="--cat-color:#e0f2f1">
+          <span>🥤</span><strong>Beverages</strong><small>Drinks & juices</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT COUNTER -->
+  <section class="section impact-banner">
+    <div class="container">
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-icon">♻️</div>
+          <div class="impact-num" data-target="2340">2340</div>
+          <div class="impact-label">kg Food Rescued</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-icon">🌍</div>
+          <div class="impact-num" data-target="4680">4680</div>
+          <div class="impact-label">kg CO₂ Saved</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-icon">🍽️</div>
+          <div class="impact-num" data-target="9360">9360</div>
+          <div class="impact-label">Meals Provided</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-icon">👥</div>
+          <div class="impact-num" data-target="131">131</div>
+          <div class="impact-label">Active Members</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Stories</span>
+        <h2>Real Impact, Real People</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <p>We used to throw away 10 kg of food after every event. FoodSave helped us donate to 3 NGOs in our area. Now nothing goes to waste!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PS</div>
+            <div><strong>Priya Sharma</strong><small>Event Organizer, Jaipur</small></div>
+          </div>
+        </div>
+        <div class="testi-card testi-featured">
+          <div class="testi-quote">"</div>
+          <p>Our shelter receives fresh meals every day through FoodSave. The platform is so easy to use and the donors are incredibly generous. We can now feed 50 more children daily.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RC</div>
+            <div><strong>Ravi Chandra</strong><small>Director, Aasra NGO, Jaipur</small></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <p>My restaurant would throw 5–8 kg of food daily. With FoodSave, that food now reaches people who need it most. It feels amazing to contribute.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AK</div>
+            <div><strong>Amit Kumar</strong><small>Restaurant Owner, Jaipur</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Ready to Make a Difference?</h2>
+          <p>Join 131 members already fighting food waste in your city</p>
+        </div>
+        <div class="cta-btns">
+          <a href="pages/auth.html?mode=register&role=donor" class="btn-cta-primary">I Want to Donate Food</a>
+          <a href="pages/auth.html?mode=register&role=recipient" class="btn-cta-ghost">Register as NGO/Recipient</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo"><span class="logo-leaf">🌿</span><span>FoodSave</span></div>
+          <p>Connecting food donors with those in need. Zero waste. Zero hunger.</p>
+          <div class="social-links">
+            <a href="#">📘</a><a href="#">🐦</a><a href="#">📸</a><a href="#">💼</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="pages/browse.html">Browse Food</a></li>
+            <li><a href="pages/donate.html">Donate Food</a></li>
+            <li><a href="pages/impact.html">Impact Dashboard</a></li>
+            <li><a href="pages/about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>For Donors</h4>
+          <ul>
+            <li><a href="pages/auth.html?mode=register&role=donor">Register as Donor</a></li>
+            <li><a href="pages/dashboard.html">My Donations</a></li>
+            <li><a href="#">Donation Guide</a></li>
+            <li><a href="#">Tax Benefits</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>For NGOs</h4>
+          <ul>
+            <li><a href="pages/auth.html?mode=register&role=recipient">Register as NGO</a></li>
+            <li><a href="pages/browse.html">Find Food</a></li>
+            <li><a href="#">Partner Program</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 FoodSave. Made with 💚 in Jaipur, Rajasthan</p>
+        <p>API: <code>localhost:5000/api</code> | Docs available</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
